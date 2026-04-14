@@ -1,7 +1,5 @@
 import os
 from datasets import load_dataset
-from huggingface_hub import cached_download, HfFileSystem
-import shutil
 
 def download_and_setup_dataset():
     print("Starting download for Defactify_Image_Dataset:")
@@ -31,7 +29,4 @@ def download_and_setup_dataset():
         raise
 
 if __name__ == "__main__":
-    # Clear the cache before downloading
-    cache_dir = "~/.cache/huggingface/datasets/"
-    shutil.rmtree(cache_dir, ignore_errors=True)
     ds = download_and_setup_dataset()
