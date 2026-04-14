@@ -3,7 +3,7 @@ import kaggle
 
 def download_celeb_df():
     # The dataset identifier from the Kaggle URL
-    dataset_path = 'pranabr0y/celebdf-v2image-dataset'
+    dataset_path = 'reubensuju/celeb-df-v2'
     
     # Define the target directory for your data pipeline
     # Ensure the drive hosting this path has sufficient storage!
