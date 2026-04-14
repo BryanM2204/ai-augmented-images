@@ -15,6 +15,9 @@ def download_and_setup_dataset():
         # Download the dataset to the local directory (approx 7.5GB)
         dataset = load_dataset("Rajarshi-Roy-research/Defactify_Image_Dataset",cache_dir=data_dir)
 
+        # Strip out Task B (Label_B) since that is irrelevant for our project
+        dataset = dataset.remove_columns(["Label_B", "Caption"])
+
         print("\nDownload Complete!")
         print(f"\nStructure: {dataset}")        
 
