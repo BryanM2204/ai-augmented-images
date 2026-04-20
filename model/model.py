@@ -27,7 +27,7 @@ def build_vit_classifier(model_ckpt="google/vit-base-patch16-224"):
         num_labels=3,
         id2label=id2label,
         label2id=label2id,
-        ignore_mismatched_sizes=True
+        ignore_mismatched_sizes=True,
         output_attentions=True
     )
 
