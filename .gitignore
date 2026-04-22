@@ -1,0 +1,4 @@
+data/
+preprocessed_data/
+logs/
+*.out
