@@ -97,7 +97,7 @@ if __name__ == "__main__":
     
     # 1. Load Model with weights_only=True to avoid that warning you saw earlier
     model = build_vit_classifier()
-    model.load_state_dict(torch.load("/home/bam20007/ai-augmented-images/saved_models/best_vit_model.pth", weights_only=True))
+    model.load_state_dict(torch.load("/home/bam20007/ai-augmented-images/checkpoints/model_v2_checkpoint/best_vit_model.pth", weights_only=True))
     model.to(device)
 
     # 2. Load the Test Data

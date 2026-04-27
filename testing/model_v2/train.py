@@ -61,7 +61,7 @@ def validate(model, val_loader, criterion, device):
     model.train()
     return avg_loss, accuracy
 
-def train_model(epochs=10, batch_size=128, learning_rate=2e-4, val_every_steps=500):
+def train_model(epochs=10, batch_size=128, learning_rate=5e-5, val_every_steps=500):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"starting training on: {device}")
 
@@ -86,8 +86,8 @@ def train_model(epochs=10, batch_size=128, learning_rate=2e-4, val_every_steps=5
     # ------------------------------
 
     # 3. Optimizer & Schedulers
-    optimizer = AdamW(model.parameters(), lr=learning_rate, weight_decay=0.01)
-    criterion = nn.CrossEntropyLoss()
+    optimizer = AdamW(model.parameters(), lr=learning_rate, weight_decay=0.05)
+    criterion = nn.CrossEntropyLoss(label_smoothing=0.1)
     scaler = torch.amp.GradScaler('cuda')
     
     total_steps = len(train_loader) * epochs

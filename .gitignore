@@ -2,3 +2,7 @@ data/
 preprocessed_data/
 logs/
 *.out
+*.log
+checkpoints/
+*.jpg
+*.png

@@ -1,0 +1,55 @@
+Initial 2 epoch model:
+--- Classification Report ---
+              precision    recall  f1-score   support
+
+   Authentic       0.82      0.84      0.83      2811
+    Deepfake       0.86      0.84      0.85      3003
+AI-Generated       0.99      0.99      0.99      3000
+
+    accuracy                           0.89      8814
+   macro avg       0.89      0.89      0.89      8814
+weighted avg       0.89      0.89      0.89      8814
+
+
+
+
+model_v2:
+--- Classification Report ---
+              precision    recall  f1-score   support
+
+   Authentic       0.90      0.77      0.83      2811
+    Deepfake       0.82      0.92      0.87      3003
+AI-Generated       0.98      1.00      0.99      3000
+
+    accuracy                           0.90      8814
+   macro avg       0.90      0.89      0.89      8814
+weighted avg       0.90      0.90      0.90      8814
+
+
+
+model_v2 w/ autehntic bias of 1.5:
+--- Adjusted Classification Report ---
+              precision    recall  f1-score   support
+
+   Authentic       0.79      0.88      0.83      2811
+    Deepfake       0.88      0.79      0.83      3003
+AI-Generated       0.99      1.00      0.99      3000
+
+    accuracy                           0.89      8814
+   macro avg       0.89      0.89      0.89      8814
+weighted avg       0.89      0.89      0.89      8814
+
+
+
+model_v2 w/ authentic bias of 1.0:
+--- Adjusted Classification Report ---
+              precision    recall  f1-score   support
+
+   Authentic       0.84      0.83      0.83      2811
+    Deepfake       0.85      0.85      0.85      3003
+AI-Generated       0.99      1.00      0.99      3000
+
+    accuracy                           0.89      8814
+   macro avg       0.89      0.89      0.89      8814
+weighted avg       0.89      0.89      0.89      8814
+
