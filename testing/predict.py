@@ -7,9 +7,9 @@ from PIL import Image, ImageOps
 import os
 
 # Internal import from your project structure
-from model_v2.vit_model import build_vit_classifier
+from model_v3.vit_model import build_vit_classifier
 
-def run_inference(image_path, model_path, bias=1.0):
+def run_inference(image_path, model_path, bias=0.0):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     class_names = ["Authentic", "Deepfake", "AI-Generated"]
 
@@ -26,7 +26,7 @@ def run_inference(image_path, model_path, bias=1.0):
     # 3. Preprocessing (No Cropping - Full Frame)
     # We use Resize((224, 224)) to match your training pipeline
     transform = transforms.Compose([
-        transforms.Resize((224, 224)),
+        transforms.Resize((384, 384)),
         transforms.ToTensor(),
         transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
     ])
@@ -43,8 +43,7 @@ def run_inference(image_path, model_path, bias=1.0):
 
     # 5. Attention Map Extraction
     attentions = outputs.attentions[-1] 
-    att_map = attentions.mean(dim=1).squeeze(0)[0, 1:].reshape(14, 14).cpu().numpy()
-    
+    att_map = attentions.mean(dim=1).squeeze(0)[0, 1:].reshape(24, 24).cpu().numpy()    
     # Resize to match the display size
     att_resized = cv2.resize(att_map / np.max(att_map), (fixed_img.size[0], fixed_img.size[1]))
     
@@ -80,6 +79,6 @@ def run_inference(image_path, model_path, bias=1.0):
     plt.show()
 
 if __name__ == "__main__":
-    IMG_PATH = "/home/bam20007/ai-augmented-images/20260427_134152.jpg" 
-    MODEL_PATH = "/home/bam20007/ai-augmented-images/checkpoints/model_v2_checkpoint/best_vit_model.pth"
-    run_inference(IMG_PATH, MODEL_PATH, bias=1.0)
+    IMG_PATH = "/home/bam20007/ai-augmented-images/image.png" 
+    MODEL_PATH = "/home/bam20007/ai-augmented-images/checkpoints/vit_base_16_384_aggressive_regularization/best_vit_model.pth"
+    run_inference(IMG_PATH, MODEL_PATH, bias=0.0)

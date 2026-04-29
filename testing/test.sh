@@ -14,7 +14,7 @@ module purge
 module load gcc/12.2.0
 module load cuda/12.2
 source /home/bam20007/miniconda3/etc/profile.d/conda.sh
-conda activate vlm_internvl
+conda activate ai-images
 
 # run the testing script
 echo "Starting testing at $(date)"

@@ -5,7 +5,7 @@
 #SBATCH --nodes=1                       # Run on a single node
 #SBATCH --cpus-per-task=8               # Use multiple cores for parallel workers
 #SBATCH --mem=16G                        # Memory requirement
-#SBATCH --time=4:00:00                 # Max wall time (adjust based on internet speed)
+#SBATCH --time=1:00:00                 # Max wall time (adjust based on internet speed)
 
 # activate conda environemnt - ai-iamges
 source ~/miniconda3/etc/profile.d/conda.sh

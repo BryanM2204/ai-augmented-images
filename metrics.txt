@@ -53,3 +53,23 @@ AI-Generated       0.99      1.00      0.99      3000
    macro avg       0.89      0.89      0.89      8814
 weighted avg       0.89      0.89      0.89      8814
 
+
+model_v3 w/ authentic bias of 0.0:
+--- Adjusted Classification Report ---
+              precision    recall  f1-score   support
+
+   Authentic       0.93      0.93      0.93      2843
+    Deepfake       0.94      0.94      0.94      3005
+AI-Generated       1.00      1.00      1.00      3000
+
+    accuracy                           0.96      8848
+   macro avg       0.96      0.96      0.96      8848
+weighted avg       0.96      0.96      0.96      8848
+
+It is overfitting way too much, does good on training data but is terrible on validation
+
+
+
+model_v4 - vit-base-patch16-384:
+
+

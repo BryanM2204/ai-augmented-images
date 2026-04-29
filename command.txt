@@ -1,0 +1,6 @@
+srun --job-name=baseline --partition=general-gpu --gres=gpu:1 --nodes=1 --cpus-per-task=4 --mem=16GB --time=1:00:00 --pty bash
+
+
+You can use GUIs on the HPC. Try logging in with
+	ssh -Y netID@hpc2.storrs.hpc.uconn.edu
+	srun --x11 --ntasks=16 --nodes=1 --gres=gpu:1 --partition=general-gpu --pty bash

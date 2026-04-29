@@ -3,7 +3,7 @@ import cv2
 import numpy as np
 from PIL import Image, ImageOps
 
-def preprocess_image(image_path, output_path, size=(224, 224)):
+def preprocess_image(image_path, output_path, size=(384, 384)):
     """
     Standardizes image size using padding to preserve aspect ratio,
     then resizes for ViT ingestion.
@@ -11,6 +11,7 @@ def preprocess_image(image_path, output_path, size=(224, 224)):
     try:
         with Image.open(image_path) as img:
             # 1. Convert to RGB (handles grayscale or CMYK sources)
+            img = ImageOps.exif_transpose(img) # Add this
             img = img.convert('RGB')
             
             # 2. Pad to Square (Letterboxing)
@@ -22,7 +23,7 @@ def preprocess_image(image_path, output_path, size=(224, 224)):
             padding = (hp, vp, max_wh - w - hp, max_wh - h - vp)
             img = ImageOps.expand(img, padding, fill=(0, 0, 0))
             
-            # 3. Resize to 224x224
+            # 3. Resize to 384x384
             # Using LANCZOS (high-quality downsampling) to preserve artifacts
             img = img.resize(size, Image.Resampling.LANCZOS)
             
@@ -50,4 +51,4 @@ def batch_process(input_root, output_root):
                 )
 
 # Example usage:
-batch_process('/home/bam20007/ai-augmented-images/data/raw_data', '/home/bam20007/ai-augmented-images/preprocessed_data')
+batch_process('/home/bam20007/ai-augmented-images/data/raw_data', '/home/bam20007/ai-augmented-images/preprocessed_data_v2')

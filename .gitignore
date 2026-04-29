@@ -6,3 +6,5 @@ logs/
 checkpoints/
 *.jpg
 *.png
+__pycache__/
+*.pyc
