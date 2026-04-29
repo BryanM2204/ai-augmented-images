@@ -3,9 +3,10 @@ from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
 
 def get_dataloaders(data_dir, batch_size=32, num_workers=16):
-    # 1. Training: "Stress-test" the model's vision
+    # 1. Training: Force the model to find forensic artifacts inside small patches
     train_transform = transforms.Compose([
-        transforms.RandomResizedCrop((384, 384), scale=(0.7, 1.0)), 
+        # Scale (0.3, 1.0) ensures the model often sees crops with NO black bars
+        transforms.RandomResizedCrop((384, 384), scale=(0.3, 1.0)), 
         transforms.RandAugment(num_ops=2, magnitude=9),
         transforms.RandomHorizontalFlip(p=0.5),
         transforms.ColorJitter(brightness=0.3, contrast=0.3),
@@ -14,9 +15,10 @@ def get_dataloaders(data_dir, batch_size=32, num_workers=16):
         transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
     ])
 
-    # 2. Validation/Test: Stay clean for consistent metrics
+    # 2. Validation/Test: Standardize with a "Deep Zoom" to remove edge shortcuts
     val_transform = transforms.Compose([
-        transforms.Resize((384, 384)),
+        transforms.Resize(600),     # Resize large enough to push bars outside the 384px window
+        transforms.CenterCrop(384),  # Strip the outer edges entirely
         transforms.ToTensor(),
         transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
     ])
