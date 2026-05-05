@@ -4,7 +4,6 @@ logs/
 *.out
 *.log
 checkpoints/
-*.jpg
-*.png
 __pycache__/
 *.pyc
+*.pth

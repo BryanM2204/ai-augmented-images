@@ -34,6 +34,8 @@ def evaluate_metrics(model, test_loader, device, authentic_bias=0.0):
             all_labels.extend(labels.cpu().numpy())
 
     class_names = ["Authentic", "Deepfake", "AI-Generated"]
+    print(classification_report(all_labels, all_preds, target_names=class_names))
+
     report_dict = classification_report(all_labels, all_preds, target_names=class_names, output_dict=True)
     
     # Save a confusion matrix for every bias level to track the trade-off

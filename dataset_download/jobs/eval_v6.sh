@@ -7,7 +7,7 @@
 #SBATCH --constraint="a100"
 #SBATCH --mem=48GB
 #SBATCH --partition=general-gpu
-#SBATCH --time=00:15:00
+#SBATCH --time=00:30:00
 
 # activate ai-images 
 module purge

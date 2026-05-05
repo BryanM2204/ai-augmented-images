@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=vit_eval_v4
-#SBATCH --output=logs/vit_eval_v4_%j.out
+#SBATCH --output=logs/vit_eval_v4_USE_THIS_PLEASAE%j.out
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=8
 #SBATCH --gres=gpu:1
