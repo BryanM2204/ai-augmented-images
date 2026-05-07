@@ -77,13 +77,12 @@ def train_model(epochs=10, batch_size=128, learning_rate=2e-4, val_every_steps=5
     train_loader, val_loader, _ = get_dataloaders(
         data_dir=data_dir, 
         batch_size=batch_size, 
-        num_workers=16  # Matches the --cpus-per-task in your SLURM script
+        num_workers=16  # Matches the --cpus-per-task in SLURM script
     )
 
     val_every_steps = len(train_loader) 
         
     print(f"Dataset loaded: {len(train_loader)} training batches, {len(val_loader)} validation batches.")
-    # ------------------------------
 
     # 3. Optimizer & Schedulers
     optimizer = AdamW(model.parameters(), lr=learning_rate, weight_decay=0.01)
@@ -97,9 +96,6 @@ def train_model(epochs=10, batch_size=128, learning_rate=2e-4, val_every_steps=5
         num_training_steps=total_steps
     )
 
-    # 4. Checkpoint Loading
-    # ... (previous setup for optimizer, scheduler, etc.) ...
-    
     # 4. Checkpoint Loading & Early Stopping Setup
     os.makedirs("saved_models", exist_ok=True)
     start_epoch, start_step, history = load_checkpoint(model, optimizer, scheduler)
@@ -123,12 +119,10 @@ def train_model(epochs=10, batch_size=128, learning_rate=2e-4, val_every_steps=5
             images, labels = images.to(device), labels.to(device)
             optimizer.zero_grad()
             
-            # --- MIXED PRECISION FORWARD PASS ---
             with torch.amp.autocast(device_type="cuda"):
                 outputs = model(images)
                 loss = criterion(outputs.logits, labels)
             
-            # --- SCALED BACKWARD PASS ---
             scaler.scale(loss).backward()
             scaler.step(optimizer)
             scaler.update()
@@ -166,7 +160,7 @@ def train_model(epochs=10, batch_size=128, learning_rate=2e-4, val_every_steps=5
             break
         start_step = 0
 
-    print("\nTraining Complete! CSV saved for your MacBook plotting script.")
+    print("\nTraining Complete")
 
 if __name__ == "__main__":
     train_model()

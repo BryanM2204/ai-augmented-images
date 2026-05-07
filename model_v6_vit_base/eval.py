@@ -46,7 +46,7 @@ def evaluate_metrics(model, test_loader, device, authentic_bias=0.0):
     plt.ylabel('Actual')
     plt.title(f'Confusion Matrix (Bias={authentic_bias})')
     plt.savefig(f'confusion_matrix_biased_{authentic_bias}.png')
-    plt.close() # Close to prevent memory accumulation in loops
+    plt.close()
 
     return report_dict
 
@@ -104,7 +104,7 @@ def visualize_attention(model, raw_image, device, save_name='attention_sample.pn
 if __name__ == "__main__":
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     
-    # Load the best 'Honest' model (Step 5)
+    # Load the best model
     model = build_vit_classifier()
     ckpt_path = "/home/bam20007/ai-augmented-images/checkpoints/final_plesae_work/best_vit_model.pth"
     model.load_state_dict(torch.load(ckpt_path, map_location=device, weights_only=True))

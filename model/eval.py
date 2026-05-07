@@ -107,14 +107,12 @@ if __name__ == "__main__":
     # 3. Run Quantitative Evaluation
     evaluate_metrics(model, test_loader, device)
     
-    # 4. ADD THIS: Qualitative Attention Check
     # Get one batch of images to visualize
     sample_images, sample_labels = next(iter(test_loader))
     
     # Take the first image in the batch
     img_tensor = sample_images[0].to(device)
-    
-    # IMPORTANT: To visualize, we need the "Original" image. 
+     
     # Since the tensor is normalized, we should convert it back to a viewable format.
     inv_normalize = transforms.Normalize(
         mean=[-0.485/0.229, -0.456/0.224, -0.406/0.225],

@@ -15,7 +15,6 @@ def export_images(dataset, output_dir, max_images_per_split=None):
         split_out = os.path.join(output_dir, split_name)
         os.makedirs(split_out, exist_ok=True)
 
-        # Avoid Pillow requirement by reading raw bytes/path from Image(decode=False).
         raw_split = split_ds.cast_column("Image", Image(decode=False))
         split_count = 0
         split_metadata = []

@@ -7,15 +7,14 @@ def get_dataloaders(data_dir, batch_size=32, num_workers=4):
     mean = [0.485, 0.456, 0.406]
     std = [0.229, 0.224, 0.225]
 
-    # Training: Add slight forensic augmentations
+    # Training
     train_transform = transforms.Compose([
         transforms.Resize((224, 224)),
-        # Consider adding transforms.RandomHorizontalFlip() for robustness
         transforms.ToTensor(),
         transforms.Normalize(mean=mean, std=std)
     ])
 
-    # Validation/Test: No augmentations, just normalization
+    # Validation/Test
     val_transform = transforms.Compose([
         transforms.Resize((224, 224)),
         transforms.ToTensor(),

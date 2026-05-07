@@ -7,7 +7,6 @@ import os
 import pandas as pd
 import time
 
-# Internal imports from your team's files
 from vit_model import build_vit_classifier
 from dataset import get_dataloaders
 
@@ -62,7 +61,6 @@ def train_model(epochs=10, batch_size=32, learning_rate=1e-5):
     model.to(device)
 
     # 2. Accumulation Configuration
-    # Effective Batch Size = batch_size * accumulation_steps (32 * 8 = 256)
 
     data_dir = os.path.expanduser('~/ai-augmented-images/data/final_dataset_v2')
     train_loader, val_loader, _ = get_dataloaders(
@@ -129,7 +127,6 @@ def train_model(epochs=10, batch_size=32, learning_rate=1e-5):
         if val_loss < best_val_loss:
             best_val_loss = val_loss
             epochs_no_improve = 0
-            # Fixed pathing to use SAVE_DIR
             torch.save(model.state_dict(), f"vit_base_16_384_aggressive_regularization/best_vit_model.pth")
             print(f"\n[Epoch {epoch+1}] New Best Val Loss: {val_loss:.4f}!")
         else:

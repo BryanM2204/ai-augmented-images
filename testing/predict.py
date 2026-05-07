@@ -19,12 +19,10 @@ def run_inference(image_path, model_path, bias=0.0):
     model.to(device).eval()
 
     # 2. Load & Fix Rotation
-    # This is the most important fix for phone photos
     raw_img = Image.open(image_path).convert('RGB')
     fixed_img = ImageOps.exif_transpose(raw_img) 
 
     # 3. Preprocessing (No Cropping - Full Frame)
-    # We use Resize((224, 224)) to match your training pipeline
     transform = transforms.Compose([
         transforms.Resize((384, 384)),
         transforms.ToTensor(),
@@ -36,7 +34,7 @@ def run_inference(image_path, model_path, bias=0.0):
     with torch.no_grad():
         outputs = model(img_tensor, output_attentions=True)
         logits = outputs.logits.clone()
-        logits[:, 0] += bias # Our balanced 1.0 bias
+        logits[:, 0] += bias
         
         probs = torch.softmax(logits, dim=-1)[0]
         pred_idx = torch.argmax(logits, dim=-1).item()
@@ -49,7 +47,7 @@ def run_inference(image_path, model_path, bias=0.0):
     
     # 6. Heatmap Generation (Fixing Color Space)
     heatmap = cv2.applyColorMap(np.uint8(255 * att_resized), cv2.COLORMAP_JET)
-    heatmap_rgb = cv2.cvtColor(heatmap, cv2.COLOR_BGR2RGB) # Corrects the blue/red inversion
+    heatmap_rgb = cv2.cvtColor(heatmap, cv2.COLOR_BGR2RGB)
     
     # Overlay logic
     overlay = (np.float32(heatmap_rgb) / 255) * 0.4 + (np.float32(fixed_img) / 255)

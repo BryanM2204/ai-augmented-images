@@ -33,7 +33,6 @@ def top_off_class_0(defactify_test_path, target_dir, count_needed=1387):
                         new_name = f"test_{filename}"
                         dest_path = os.path.join(target_dir, new_name)
                         
-                        # Use copy2 to preserve metadata or os.link for speed
                         shutil.copy2(source_path, dest_path)
                         copied_count += 1
             except Exception as e:
@@ -41,7 +40,6 @@ def top_off_class_0(defactify_test_path, target_dir, count_needed=1387):
 
     print(f"Done! Added {copied_count} images to {target_dir}")
 
-# --- Execution ---
 test_path = '/home/bam20007/ai-augmented-images/data/defactify/test'
 class_0_path = '/home/bam20007/ai-augmented-images/data/raw_data/class_0'
 

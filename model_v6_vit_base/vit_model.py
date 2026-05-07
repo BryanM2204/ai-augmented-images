@@ -4,9 +4,8 @@ def build_vit_classifier(model_ckpt="google/vit-base-patch16-384"):
     id2label = {0: "Authentic", 1: "Deepfake", 2: "AI-Generated"}
     label2id = {v: k for k, v in id2label.items()}
 
-    # Load config and increase dropout to 0.2
     config = ViTConfig.from_pretrained(model_ckpt)
-    config.hidden_dropout_prob = 0.2      # Standard is 0.1
+    config.hidden_dropout_prob = 0.2
     config.attention_probs_dropout_prob = 0.2 
     config.num_labels = 3
     config.id2label = id2label

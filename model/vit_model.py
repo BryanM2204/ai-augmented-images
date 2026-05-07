@@ -5,13 +5,12 @@ def build_vit_classifier(model_ckpt="google/vit-base-patch16-224"):
     """
     Initializes a pre-trained Vision Transformer for 3-class classification.
     
-    Classes based on the project proposal:
     0: Authentic (Real images from Defactify / Celeb-DF v2)
     1: Deepfake (Manipulated frames from Celeb-DF v2)
     2: AI-Generated (Fully synthesized from DALL-E 3, Midjourney v6, SD3)
     """
     
-    # Define the class mappings as outlined in your proposal
+    # Define the class mappings
     id2label = {
         0: "Authentic",
         1: "Deepfake",

@@ -26,7 +26,6 @@ def download_celeb_df():
         
     except Exception as e:
         print(f"An error occurred during the download: {e}")
-        print("Please verify your kaggle.json file is in the correct location.")
 
 if __name__ == "__main__":
     download_celeb_df()

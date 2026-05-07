@@ -36,7 +36,6 @@ def extract_uniform_frames(src_folders, output_folder, frames_per_vid):
             cap.release()
     print(f"Extraction complete for {output_folder}")
 
-# --- Execution ---
 # Class 0: Extracting ~15,000 frames from Real sources
 extract_uniform_frames(['/home/bam20007/ai-augmented-images/data/celeb-df-v2/Celeb-real', '/home/bam20007/ai-augmented-images/data/celeb-df-v2/YouTube-real'], 'dataset/class_0', 17)
 

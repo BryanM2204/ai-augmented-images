@@ -66,8 +66,6 @@ def split_dataset(input_root, output_root, split_ratio=(0.8, 0.1, 0.1)):
 
     print("\nDataset split complete!")
 
-# --- Execution ---
-# Note: Ensure the input_data path matches where your padded/resized images live
 input_data = '~/ai-augmented-images/preprocessed_data_v2'
 output_data = '~/ai-augmented-images/data/final_dataset_v2'
 

@@ -15,12 +15,10 @@ def sort_defactify_train_val(base_path, output_path):
     os.makedirs(class_0_dir, exist_ok=True)
     os.makedirs(class_2_dir, exist_ok=True)
 
-    # Note: Defactify uses 'validation' instead of 'val' based on your snippet
     splits = ['train', 'validation']
 
     for split in splits:
         split_dir = os.path.join(base_path, split)
-        # Based on your input, the file is named 'labels.jsonl'
         jsonl_file = os.path.join(split_dir, 'labels.jsonl') 
         
         if not os.path.exists(jsonl_file):
@@ -34,7 +32,6 @@ def sort_defactify_train_val(base_path, output_path):
             for line in f:
                 try:
                     data = json.loads(line)
-                    # Correcting keys to match your JSONL snippet
                     image_name = data['filename']
                     label = data['label_a'] 
                     
@@ -59,5 +56,5 @@ def sort_defactify_train_val(base_path, output_path):
 
 # Execute the sorting
 base_defactify_path = '/home/bam20007/ai-augmented-images/data/defactify'
-output_destination = '~/ai-augmented-images/data/' # Root of your project
+output_destination = '~/ai-augmented-images/data/'
 sort_defactify_train_val(base_defactify_path, output_destination)

@@ -16,17 +16,14 @@ st.markdown("---")
 def load_model(model_path):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = build_vit_classifier()
-    # map_location ensures we can run on CPU/Login nodes or GPUs seamlessly
     model.load_state_dict(torch.load(model_path, map_location=device, weights_only=True))
     model.to(device).eval()
     return model, device
 
 # 2. SIDEBAR SETTINGS
 st.sidebar.header("Calibration")
-# Updated to your Step 8 path
 default_path = "/home/bam20007/ai-augmented-images/checkpoints/final_plesae_work/best_vit_model.pth"
 model_path = st.sidebar.text_input("Model Checkpoint", default_path)
-# Recommended starting bias based on your Eval logs
 bias = st.sidebar.slider("Authentic Bias (Safety Threshold)", 0.0, 2.0, 0.75, 0.05)
 
 # 3. INITIALIZE MODEL
@@ -40,7 +37,6 @@ except Exception as e:
 uploaded_file = st.file_uploader("Upload image...", type=["jpg", "jpeg", "png"])
 
 if uploaded_file is not None:
-    # Process Image Orientation (Critical for phone photos)
     raw_img = Image.open(uploaded_file).convert('RGB')
     fixed_img = ImageOps.exif_transpose(raw_img)
     
@@ -52,15 +48,15 @@ if uploaded_file is not None:
     # 5. FORENSIC PREPROCESSING (MATCHING DATASET.PY)
     # We resize larger then center crop to 384 to strip black bars
     inference_transform = transforms.Compose([
-        transforms.Resize(600), # Zoom in much further
-        transforms.CenterCrop(384), # This will definitely clear the bars
+        transforms.Resize(600),
+        transforms.CenterCrop(384),
         transforms.ToTensor(),
         transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
     ])
     
     # Matching display transform for the heatmap overlay
     display_transform = transforms.Compose([
-        transforms.Resize(600), # Zoom in much further
+        transforms.Resize(600),
         transforms.CenterCrop(384)
     ])
     

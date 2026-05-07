@@ -63,9 +63,6 @@ def extract_specific_frames(video_dir, output_dir, frames_per_video, total_targe
 
     print(f"\nExtraction complete. Total frames saved: {frame_count}")
 
-# ==========================================
-# Execution
-# ==========================================
 if __name__ == "__main__":
     # 1. Extract 15,000 Authentic Images (26 per video)
     extract_specific_frames(

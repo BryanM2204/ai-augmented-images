@@ -10,7 +10,7 @@ def preprocess_image(image_path, output_path, size=(384, 384)):
     """
     try:
         with Image.open(image_path) as img:
-            # 1. Convert to RGB (handles grayscale or CMYK sources)
+            # 1. Convert to RGB
             img = ImageOps.exif_transpose(img) # Add this
             img = img.convert('RGB')
             
